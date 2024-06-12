@@ -33,7 +33,7 @@ fun AppNavigation(context: Context) {
             ImageScreen(navController = navController)
         }
         composable(route = SPEAK_SCREEN) {
-            SpeakScreen(navController = navController)
+            SpeakScreen(navController = navController,context=context)
         }
     }
 }

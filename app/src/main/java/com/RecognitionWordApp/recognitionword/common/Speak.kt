@@ -1,6 +1,7 @@
 package com.RecognitionWordApp.recognitionword.common
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,12 +10,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -32,37 +46,32 @@ fun Speak(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.Top
     ) {
-        Spacer(modifier = Modifier.size(50.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(text, fontSize = MaterialTheme.typography.headlineLarge.fontSize)
+        Spacer(modifier = Modifier.weight(0.5f))
+        SelectionContainer() {
+            Text(text, fontSize = MaterialTheme.typography.bodyLarge.fontSize)
         }
-        Spacer(modifier = Modifier.size(50.dp))
-        Row(
+        Spacer(modifier = Modifier.weight(0.5f))
+        Row (
+            horizontalArrangement  = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxWidth().height(100.dp)
-        ) {
+            modifier = Modifier.size(120.dp)) {
             Button(
-                onClick = { onButton() }, shape = CircleShape,
+                onClick = { onButton() },
+                shape = CircleShape,
+                modifier = Modifier.size(if (buttonOn) 120.dp else 80.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.baseline_mic_24),
                     contentDescription = null,
-                    modifier = Modifier.size(if (buttonOn)100.dp else 60.dp)
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
-        Spacer(modifier = Modifier.size(50.dp))
     }
 }
 
