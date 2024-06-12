@@ -36,13 +36,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.RecognitionWordApp.recognitionword.R
+import com.RecognitionWordApp.recognitionword.screens.speak.LangugagePreference
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Speak(
     text: String,
     buttonOn: Boolean,
-    onButton: () -> Unit
+    language: String,
+    onButton: () -> Unit,
+    changeLanguage : (String) -> Unit
 ) {
+    var expanded by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,6 +61,38 @@ fun Speak(
             Text(text, fontSize = MaterialTheme.typography.bodyLarge.fontSize)
         }
         Spacer(modifier = Modifier.weight(0.5f))
+        Box(modifier=Modifier.width(150.dp)) {
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }
+            ) {
+                TextField(
+                    value = language,
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    modifier = Modifier.menuAnchor()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    LangugagePreference.languageList.forEach { item ->
+                        DropdownMenuItem(
+                            text = { Text(text = item) },
+                            onClick = {
+                                changeLanguage(item)
+                                expanded = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+        Spacer(modifier = Modifier.size(10.dp))
         Row (
             horizontalArrangement  = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
@@ -79,6 +116,6 @@ fun Speak(
 @Preview
 @Composable
 fun check2() {
-    Speak("text", true, {})
+    Speak("text", true,"", {},{})
 }
 
