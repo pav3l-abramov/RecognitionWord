@@ -23,6 +23,7 @@ fun Main(
     onButton1: () -> Unit,
     onButton2: () -> Unit,
     onButton3: () -> Unit,
+    onButton4: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -47,6 +48,10 @@ fun Main(
         Button(onClick = { onButton3() }, modifier = Modifier.fillMaxWidth()) {
             Text("Camera", fontSize = 30.sp)
         }
+        Spacer(modifier = Modifier.size(50.dp))
+        Button(onClick = { onButton4() }, modifier = Modifier.fillMaxWidth()) {
+            Text("Scanner", fontSize = 30.sp)
+        }
     }
 
 }
@@ -54,5 +59,5 @@ fun Main(
 @Preview
 @Composable
 fun check() {
-    Main("text", {}, {}, {})
+    Main("text", {}, {}, {},{})
 }

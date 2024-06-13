@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.RecognitionWordApp.recognitionword.screens.camera.CameraScreen
 import com.RecognitionWordApp.recognitionword.screens.image.ImageScreen
 import com.RecognitionWordApp.recognitionword.screens.main.MainScreen
+import com.RecognitionWordApp.recognitionword.screens.scaner.ScannerScreen
 import com.RecognitionWordApp.recognitionword.screens.speak.SpeakScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -34,6 +35,9 @@ fun AppNavigation(context: Context) {
         }
         composable(route = SPEAK_SCREEN) {
             SpeakScreen(navController = navController,context=context)
+        }
+        composable(route = SCANNER_SCREEN) {
+            ScannerScreen(context=context)
         }
     }
 }
