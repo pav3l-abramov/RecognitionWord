@@ -34,22 +34,11 @@ fun ScannerScreen (context: Context, scannerViewModel:ScannerViewModel= viewMode
             scannerViewModel.setImageUris(result?.pages?.map { it.imageUri } ?: emptyList())
 
             result?.pdf?.let { pdf ->
-                val internalFos = FileOutputStream(File(context.filesDir,"scan.pdf"))
-                val externalFos = FileOutputStream(File(context.getExternalFilesDir(null),"scan.pdf"))
-
-                context.contentResolver.openInputStream(pdf.uri)?.use { inputStream ->
-                    internalFos.use { internalFos ->
-                        inputStream.copyTo(internalFos)
-                    }
-                }
-
-                context.contentResolver.openInputStream(pdf.uri)?.use { inputStream ->
-                    externalFos.use { externalFos ->
-                        inputStream.copyTo(externalFos)
-                    }
+                val fos = FileOutputStream(File(context.filesDir,"scan.pdf"))
+                context.contentResolver.openInputStream(pdf.uri)?.use {
+                    it.copyTo(fos)
                 }
             }
-
 
         }
     }
