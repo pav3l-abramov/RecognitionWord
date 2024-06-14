@@ -1,5 +1,6 @@
 package com.RecognitionWordApp.recognitionword
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.RecognitionWordApp.recognitionword.navigation.AppNavigation
+import com.RecognitionWordApp.recognitionword.screens.speak.FlashlightService
 import com.RecognitionWordApp.recognitionword.ui.theme.RecognitionWordTheme
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanner
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
@@ -21,8 +23,11 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions.SCANNER
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var serviceIntent: Intent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        serviceIntent = Intent(this, FlashlightService::class.java)
         setContent {
             RecognitionWordTheme {
                 // A surface container using the 'background' color from the theme
@@ -30,8 +35,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     val context= LocalContext.current
-                    AppNavigation(context=context)
+                    AppNavigation(context=context,serviceIntent=serviceIntent)
 
                 }
             }

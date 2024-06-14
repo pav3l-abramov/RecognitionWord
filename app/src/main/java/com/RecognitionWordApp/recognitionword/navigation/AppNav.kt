@@ -2,6 +2,7 @@ package com.RecognitionWordApp.recognitionword.navigation
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +17,7 @@ import com.RecognitionWordApp.recognitionword.screens.speak.SpeakScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun AppNavigation(context: Context) {
+fun AppNavigation(context: Context,serviceIntent:Intent) {
     val navController = rememberNavController()
    // val viewModel: SharedViewModel = hiltViewModel()
     NavHost(
@@ -34,7 +35,7 @@ fun AppNavigation(context: Context) {
             ImageScreen(navController = navController)
         }
         composable(route = SPEAK_SCREEN) {
-            SpeakScreen(navController = navController,context=context)
+            SpeakScreen(navController = navController,context=context, serviceIntent=serviceIntent)
         }
         composable(route = SCANNER_SCREEN) {
             ScannerScreen(context=context)

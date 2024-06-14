@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,8 +21,10 @@ import java.util.Locale
 fun SpeakScreen(
     navController: NavController,
     context: Context,
+    serviceIntent:Intent,
     speakViewModel: SpeakViewModel = viewModel()
 ) {
+
     val isOn by speakViewModel.isOn.collectAsState()
     val showText by speakViewModel.showText.collectAsState()
     val language by speakViewModel.language.collectAsState()
@@ -36,9 +39,18 @@ fun SpeakScreen(
                     data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS) as ArrayList<String>
                 // Обработка результата распознавания речи здесь
                 speakViewModel.changeText(res[0])
+                if(LangugagePreference.filterFlash.find { res[0].toLowerCase(Locale.ROOT).contains(it) } !=null){
+                    context.startService(serviceIntent)
+                    Log.d("",showText)
+                }
+                else{
+                    context.stopService(serviceIntent)
+                }
 
             }
         }
+
+
 
     Speak(
         showText,
