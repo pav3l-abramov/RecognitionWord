@@ -1,8 +1,5 @@
-package com.RecognitionWordApp.recognitionword.screens.scaner
+package com.RecognitionWordApp.recognitionword.screens.scanner
 
-import android.net.Uri
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 

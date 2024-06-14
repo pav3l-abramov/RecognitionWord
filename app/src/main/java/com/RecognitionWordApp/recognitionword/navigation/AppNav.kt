@@ -3,16 +3,14 @@ package com.RecognitionWordApp.recognitionword.navigation
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.RecognitionWordApp.recognitionword.screens.camera.CameraScreen
 import com.RecognitionWordApp.recognitionword.screens.image.ImageScreen
 import com.RecognitionWordApp.recognitionword.screens.main.MainScreen
-import com.RecognitionWordApp.recognitionword.screens.scaner.ScannerScreen
+import com.RecognitionWordApp.recognitionword.screens.scanner.ScannerScreen
 import com.RecognitionWordApp.recognitionword.screens.speak.SpeakScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
