@@ -27,7 +27,7 @@ fun AppNavigation(context: Context,serviceIntent:Intent) {
             MainScreen(navController = navController)
         }
         composable(route = CAMERA_SCREEN) {
-            CameraScreen(navController = navController)
+            CameraScreen(navController = navController,context=context)
         }
         composable(route = IMAGE_SCREEN) {
             ImageScreen(navController = navController)
